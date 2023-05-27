@@ -1,6 +1,6 @@
-import { User } from './user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Session {
@@ -8,7 +8,7 @@ export class Session {
   id: number;
 
   @ManyToOne(() => User)
-  user: User;
+  userId: number;
 
   @Column({ length: 255 })
   @IsNotEmpty()
