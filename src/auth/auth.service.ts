@@ -21,11 +21,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async loginUser(user: LoginUser) {
+  public async loginUser(user: LoginUser) {
     const userFounded = await this.findUser(user);
     if (!userFounded) throw new NotFoundException('User not found');
 
     const compare = bcrypt.compareSync(user.password, userFounded.password);
+
     if (!compare) throw new ConflictException('Invalid password');
 
     const payload = { userId: userFounded.id, email: user.email };
