@@ -1,20 +1,18 @@
-import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsDate } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from './user.entity';
+import { User } from '../auth/entities/user.entity';
+import { Event } from './event.entity';
 
 @Entity()
-export class Session {
+export class EventFollowers {
   @PrimaryGeneratedColumn()
   id: number;
 
   @ManyToOne(() => User)
-  userId: number;
+  user: User;
 
-  @Column({ length: 255 })
-  @IsNotEmpty()
-  @IsString()
-  @MaxLength(255)
-  token: string;
+  @ManyToOne(() => Event)
+  event: Event;
 
   @Column({ type: 'date' })
   @IsDate()
