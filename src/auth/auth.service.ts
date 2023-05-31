@@ -6,18 +6,16 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Session } from 'src/typeorm/session.entity';
 import { Repository } from 'typeorm';
-import { User } from '../typeorm/user.entity';
 import { LoginUser } from './dto/login-auth.dto';
+import { User } from './entities/user.entity';
+import { CreateUserDto } from './dto/create-auth.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    @InjectRepository(Session)
-    private readonly sessionRepository: Repository<Session>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -31,6 +29,23 @@ export class AuthService {
 
     const payload = { userId: userFounded.id, email: user.email };
     return await this.jwtService.signAsync(payload);
+  }
+
+  public async createUser(user: CreateUserDto) {
+    const email = await this.findUser(user);
+
+    if (email) throw new ConflictException('Email already in use!');
+
+    const passwordCrypted = bcrypt.hashSync(user.password, 10);
+
+    return this.userRepository.save({
+      email: user.email,
+      name: user.name,
+      number: '123123123',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      password: passwordCrypted,
+    });
   }
 
   private findUser({ email }): Promise<User> {
