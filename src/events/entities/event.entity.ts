@@ -1,7 +1,7 @@
 import { IsDateString, IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Address } from './address.entity';
-import { Producer } from './producer.entity';
+import { Address } from '../../entities/address.entity';
+import { Producer } from '../../entities/producer.entity';
 
 @Entity()
 export class Event {
