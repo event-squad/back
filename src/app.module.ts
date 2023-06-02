@@ -40,7 +40,6 @@ import { EventsModule } from './events/events.module';
           ContactType,
           Contact,
         ],
-        synchronize: true,
       }),
       inject: [ConfigService],
     }),

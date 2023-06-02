@@ -12,6 +12,18 @@ export class Event {
   @IsNotEmpty()
   name: string;
 
+  @Column({ length: 255 })
+  @IsNotEmpty()
+  price: string;
+
+  @Column()
+  @IsNotEmpty()
+  addressId: number;
+
+  @Column()
+  @IsNotEmpty()
+  producerId: number;
+
   @Column({ type: 'date' })
   @IsDateString()
   startDate: Date;

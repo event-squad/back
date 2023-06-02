@@ -9,11 +9,13 @@ export class EventsService {
     @InjectRepository(Event) private readonly eventService: Repository<Event>,
   ) {}
 
-  findAll(): Promise<Event[]> {
-    return this.eventService.find();
+  public findAll(): Promise<Event[]> {
+    return this.eventService.query(
+      `SELECT event.*, address.city, address.state FROM event JOIN "address" ON "address".id = event."addressId"`,
+    );
   }
 
-  findOne(id: number): Promise<Event> {
+  public findOne(id: number): Promise<Event> {
     return this.eventService.findOneBy({
       id,
     });
