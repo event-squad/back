@@ -8,11 +8,12 @@ import { Address } from './entities/address.entity';
 import { Comments } from './entities/comments.entity';
 import { Contact } from './entities/contact.entity';
 import { ContactType } from './entities/contactType.entity';
-import { Event } from './entities/event.entity';
 import { EventCategory } from './entities/eventCategory.entity';
 import { EventCategoryName } from './entities/eventCategoryName.entity';
 import { EventFollowers } from './entities/eventFollowers.entity';
 import { Producer } from './entities/producer.entity';
+import { Event } from './events/entities/event.entity';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { Producer } from './entities/producer.entity';
       inject: [ConfigService],
     }),
     AuthModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [],

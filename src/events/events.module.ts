@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
+import { EventsService } from './events.service';
+import { EventsController } from './events.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { User } from './entities/user.entity';
+import { Event } from './entities/event.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Event]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -18,7 +18,7 @@ import { User } from './entities/user.entity';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
+  controllers: [EventsController],
+  providers: [EventsService],
 })
-export class AuthModule {}
+export class EventsModule {}

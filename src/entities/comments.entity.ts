@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Event } from './event.entity';
+import { Event } from '../events/entities/event.entity';
 import { Producer } from './producer.entity';
 
 @Entity()
