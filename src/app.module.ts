@@ -4,16 +4,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/user.entity';
+import { CategoryModule } from './category/category.module';
 import { Address } from './entities/address.entity';
 import { Comments } from './entities/comments.entity';
 import { Contact } from './entities/contact.entity';
 import { ContactType } from './entities/contactType.entity';
-import { EventCategory } from './entities/eventCategory.entity';
-import { EventCategoryName } from './entities/eventCategoryName.entity';
 import { EventFollowers } from './entities/eventFollowers.entity';
 import { Producer } from './entities/producer.entity';
 import { Event } from './events/entities/event.entity';
 import { EventsModule } from './events/events.module';
+import { EventCategoryName } from './category/entities/EventCategoryName';
 
 @Module({
   imports: [
@@ -33,18 +33,19 @@ import { EventsModule } from './events/events.module';
           Event,
           Address,
           Producer,
-          EventCategory,
-          EventCategoryName,
           Comments,
           EventFollowers,
           ContactType,
           Contact,
+          EventCategoryName,
         ],
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
     AuthModule,
     EventsModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [],

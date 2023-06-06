@@ -12,10 +12,6 @@ export class Event {
   @IsNotEmpty()
   name: string;
 
-  @Column({ length: 255 })
-  @IsNotEmpty()
-  price: string;
-
   @Column()
   @IsNotEmpty()
   addressId: number;
@@ -35,6 +31,10 @@ export class Event {
   @Column({ length: 255 })
   @IsNotEmpty()
   description: string;
+
+  @IsNotEmpty()
+  @Column()
+  categoryNameId: number;
 
   @ManyToOne(() => Address)
   @IsNotEmpty()

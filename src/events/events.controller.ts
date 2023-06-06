@@ -1,4 +1,11 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
 
 @Controller('api/events')
@@ -10,8 +17,19 @@ export class EventsController {
     return this.eventsService.findAll();
   }
 
+  @Get('/filter')
+  @UsePipes(new ValidationPipe())
+  filterByNameOrCategory(@Body() filter: any) {
+    return this.eventsService.filterEventsNameCategory(filter);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.eventsService.findOne(id);
+  }
+
+  @Get('/filter/:id')
+  filterEventsById(@Param('id') id: number) {
+    return this.eventsService.filterEvents(id);
   }
 }
