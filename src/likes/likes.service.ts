@@ -50,12 +50,6 @@ export class LikesService {
     return this.likesRepository.delete(likedFounded);
   }
 
-  private findEvent(id): Promise<Event> {
-    return this.eventRepository.findOneBy({
-      id,
-    });
-  }
-
   private findLikeByUserEventId(
     userId: number,
     eventId: number,
