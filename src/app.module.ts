@@ -1,4 +1,4 @@
-import { Module, Session } from '@nestjs/common';
+import { MiddlewareConsumer, Module, Session } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -14,6 +14,10 @@ import { Producer } from './entities/producer.entity';
 import { Event } from './events/entities/event.entity';
 import { EventsModule } from './events/events.module';
 import { EventCategoryName } from './category/entities/EventCategoryName';
+import { LikesModule } from './likes/likes.module';
+import { Likes } from './likes/entities/like.entity';
+import { JwtMiddleware } from './middleware/jwt.middeware';
+import { LikesController } from './likes/likes.controller';
 
 @Module({
   imports: [
@@ -38,6 +42,7 @@ import { EventCategoryName } from './category/entities/EventCategoryName';
           ContactType,
           Contact,
           EventCategoryName,
+          Likes,
         ],
         synchronize: true,
       }),
@@ -46,8 +51,13 @@ import { EventCategoryName } from './category/entities/EventCategoryName';
     AuthModule,
     EventsModule,
     CategoryModule,
+    LikesModule,
   ],
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(JwtMiddleware).forRoutes(LikesController);
+  }
+}

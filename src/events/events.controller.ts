@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Post,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -17,7 +18,7 @@ export class EventsController {
     return this.eventsService.findAll();
   }
 
-  @Get('/filter')
+  @Post('/filter')
   @UsePipes(new ValidationPipe())
   filterByNameOrCategory(@Body() filter: any) {
     return this.eventsService.filterEventsNameCategory(filter);

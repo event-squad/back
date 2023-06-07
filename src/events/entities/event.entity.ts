@@ -32,6 +32,10 @@ export class Event {
   @IsNotEmpty()
   description: string;
 
+  @Column()
+  @IsNotEmpty()
+  price: number;
+
   @IsNotEmpty()
   @Column()
   categoryNameId: number;
