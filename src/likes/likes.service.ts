@@ -50,6 +50,16 @@ export class LikesService {
     return this.likesRepository.delete(likedFounded);
   }
 
+  async findDetailedLiked(userId: number) {
+    const query = `
+    SELECT likes.id, likes."userId", event.*
+    FROM likes
+    JOIN event ON event.id = likes."eventId"
+    WHERE likes."userId" = $1`;
+
+    return this.likesRepository.query(query, [userId]);
+  }
+
   private findLikeByUserEventId(
     userId: number,
     eventId: number,

@@ -15,7 +15,7 @@ export class JwtMiddleware implements NestMiddleware {
       } catch (err) {
         return res
           .status(HttpStatus.UNAUTHORIZED)
-          .json({ message: 'Unauthorized' });
+          .json({ message: 'Unauthorized token' });
       }
     } else {
       return res.status(HttpStatus.NOT_FOUND).json({ message: 'No Token' });

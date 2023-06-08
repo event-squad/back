@@ -28,6 +28,11 @@ export class LikesController {
     return this.likesService.findAll(decoded.userId);
   }
 
+  @Get('/detailed')
+  findDetailedLiked(@Req() { decoded }: DecodedJWT) {
+    return this.likesService.findDetailedLiked(decoded.userId);
+  }
+
   @Delete(':id')
   deleteLiked(@Param('id') eventId: number, @Req() { decoded }: DecodedJWT) {
     return this.likesService.remove(decoded.userId, eventId);
