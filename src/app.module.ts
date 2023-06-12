@@ -68,6 +68,8 @@ import { AddressController } from './address/address.controller';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(JwtMiddleware).forRoutes(LikesController, AddressController);
+    consumer
+      .apply(JwtMiddleware)
+      .forRoutes(LikesController, AddressController, AppController);
   }
 }
