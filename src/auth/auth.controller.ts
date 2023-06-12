@@ -2,8 +2,10 @@ import {
   Controller,
   Post,
   Body,
+  Get,
   UsePipes,
   ValidationPipe,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUser } from './dto/login-auth.dto';

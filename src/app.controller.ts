@@ -3,7 +3,7 @@ import { Controller, Get } from '@nestjs/common';
 @Controller('api')
 export class AppController {
   @Get()
-  getUser(): string {
+  checkToken(): string {
     return 'ok';
   }
 }

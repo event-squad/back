@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from './user.entity';
 import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Session {
