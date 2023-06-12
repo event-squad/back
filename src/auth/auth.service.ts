@@ -5,11 +5,13 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import axios from 'axios';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { UserAddressCep } from '../address/entities/userAddressCep.entity';
+import { CreateUserDto } from './dto/create-auth.dto';
 import { LoginUser } from './dto/login-auth.dto';
 import { User } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +50,7 @@ export class AuthService {
     });
   }
 
-  private findUser({ email }): Promise<User> {
+  private findUser({ email }) {
     return this.userRepository.findOne({
       where: {
         email,
