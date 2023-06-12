@@ -68,7 +68,7 @@ export class AddressService {
     await this.userAddressCep
       .createQueryBuilder()
       .update(UserAddressCep)
-      .set({ userId: decoded.userId, cep: up dateAddressDto.cep })
+      .set({ userId: decoded.userId, cep: updateAddressDto.cep })
       .execute();
 
     return 'CEP Atualizado!!!';
